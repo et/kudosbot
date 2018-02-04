@@ -1,3 +1,5 @@
+WIP
+
 # Kudosbot
 
 Kudos bot is a way of automatically giving kudos to your friends.
@@ -15,7 +17,9 @@ STRAVA_PASSWORD=YOUR_STRAVA_PASSWORD
 
 ## Installation
 
+```
 bundle
+```
 
 ## Run
 
