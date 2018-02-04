@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 require 'sinatra'
-require "sinatra/reloader" if development?
+require 'sinatra/reloader' if development?
 require 'json'
 require 'sidekiq'
 require 'sidekiq/api'
@@ -13,24 +15,24 @@ class App < Sinatra::Base
   end
 
   get '/' do
-		stats = Sidekiq::Stats.new
-		workers = Sidekiq::Workers.new
-		"
-		<p>Processed: #{stats.processed}</p>
-		<p>In Progress: #{workers.size}</p>
-		<p>Enqueued: #{stats.enqueued}</p>
-		<p><a href='/'>Refresh</a></p>
-		<p><a href='/process_kudos_queue'>Process Kudos Queue</a></p>
-		<p><a href='/sidekiq'>Dashboard</a></p>
-		"
+    stats = Sidekiq::Stats.new
+    workers = Sidekiq::Workers.new
+    "
+    <p>Processed: #{stats.processed}</p>
+    <p>In Progress: #{workers.size}</p>
+    <p>Enqueued: #{stats.enqueued}</p>
+    <p><a href='/'>Refresh</a></p>
+    <p><a href='/process_kudos_queue'>Process Kudos Queue</a></p>
+    <p><a href='/sidekiq'>Dashboard</a></p>
+    "
   end
 
   get '/process_kudos_queue' do
-		"
-		<p>Processing kudos queue: #{KudosWorker.perform_async}</p>
-		<p><a href='/'>Back</a></p>
-		"
-	end
+    "
+    <p>Processing kudos queue: #{KudosWorker.perform_async}</p>
+    <p><a href='/'>Back</a></p>
+    "
+  end
 
   get '/event' do
     hub_challenge = params['hub.challenge']
@@ -38,7 +40,6 @@ class App < Sinatra::Base
 
     content_type :json
     { 'hub.challenge': hub_challenge }.to_json
-
   end
 
   post '/event' do
@@ -47,8 +48,8 @@ class App < Sinatra::Base
     request_payload = JSON.parse(request.body.read)
     p request_payload
 
-    #append the payload to a file
-    File.open("events.txt", "a") do |f|
+    # append the payload to a file
+    File.open('events.txt', 'a') do |f|
       f.puts(request_payload)
     end
   end
