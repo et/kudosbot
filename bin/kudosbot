@@ -1,9 +1,0 @@
-#!/usr/bin/env ruby
-
-require "bundler/setup"
-require 'dotenv'
-require "kudosbot"
-
-Dotenv.load
-
-Class.new.extend(Kudosbot).run ENV['STRAVA_EMAIL'], ENV['STRAVA_PASSWORD']
