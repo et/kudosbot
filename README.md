@@ -18,7 +18,6 @@ STRAVA_PASSWORD=YOUR_STRAVA_PASSWORD
 ## Installation
 
 ```
-brew install chromedriver
 bundle
 ```
 
