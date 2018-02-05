@@ -1,11 +1,12 @@
 source 'https://rubygems.org'
 
+gem 'capybara'
 gem 'dotenv'
 gem 'foreman'
 gem 'puma'
+gem 'selenium-webdriver'
 gem 'sidekiq'
 gem 'sinatra'
-gem 'watir', '~> 6.10.3'
 
 group :development do
   gem 'rubocop'
