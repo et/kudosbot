@@ -7,8 +7,8 @@ class KudosService
   include Capybara::DSL
 
   def initialize
-    # Capybara.default_driver = :selenium_chrome_headless
-    Capybara.default_driver = :selenium_chrome
+    Capybara.default_driver = :selenium_chrome_headless
+    #Capybara.default_driver = :selenium_chrome
 
     email = ENV['STRAVA_EMAIL']
     password = ENV['STRAVA_PASSWORD']
