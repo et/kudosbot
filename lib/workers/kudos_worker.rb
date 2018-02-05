@@ -3,6 +3,11 @@
 require 'dotenv/load'
 require 'watir'
 
+Sidekiq.configure_server do |config|
+  config.redis = { url: "redis://#{ENV['REDIS_HOST']}:#{ENV['REDIS_PORT']}" }
+end
+
+
 class KudosWorker
   include Sidekiq::Worker
 

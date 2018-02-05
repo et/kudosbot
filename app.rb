@@ -9,6 +9,12 @@ require 'sidekiq/web'
 
 require_relative 'lib/workers/kudos_worker.rb'
 
+Sidekiq.configure_client do |config|
+  config.redis = { url: "redis://#{ENV['REDIS_HOST']}:#{ENV['REDIS_PORT']}" }
+end
+
+$redis = Redis.new(url: "redis://#{ENV['REDIS_HOST']}:#{ENV['REDIS_PORT']}")
+
 class App < Sinatra::Base
   configure :development do
     register Sinatra::Reloader
@@ -18,6 +24,7 @@ class App < Sinatra::Base
     stats = Sidekiq::Stats.new
     workers = Sidekiq::Workers.new
     "
+    <p>foo</p>
     <p>Processed: #{stats.processed}</p>
     <p>In Progress: #{workers.size}</p>
     <p>Enqueued: #{stats.enqueued}</p>
