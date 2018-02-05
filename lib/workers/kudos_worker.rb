@@ -14,5 +14,6 @@ class KudosWorker
   def perform
     p 'Starting kudos worker'
     KudosService.new.kudos
+    p 'Ending kudos worker'
   end
 end
