@@ -12,6 +12,7 @@ class KudosWorker
   include Sidekiq::Worker
 
   def perform
+    p 'Starting kudos worker'
     KudosService.new.kudos
   end
 end
