@@ -46,7 +46,6 @@ class KudosService
 
     find('#dashboard-feed') # waits until this dom element is available
 
-    buttons = page.evaluate_script("jQuery('button.js-add-kudo').length")
-    p buttons
+    page.evaluate_script("jQuery('button.js-add-kudo').click()")
   end
 end
