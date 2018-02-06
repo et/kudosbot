@@ -7,6 +7,7 @@ require 'sidekiq'
 require 'sidekiq/api'
 require 'sidekiq/web'
 
+require_relative 'lib/services/kudos_service.rb'
 require_relative 'lib/workers/kudos_worker.rb'
 
 Sidekiq.configure_client do |config|
@@ -29,6 +30,7 @@ class App < Sinatra::Base
     <p>Enqueued: #{stats.enqueued}</p>
     <p><a href='/'>Refresh</a></p>
     <p><a href='/process_kudos_queue'>Process Kudos Queue</a></p>
+    <p><a href='/process_kudos_queue_without_sidekiq'>Process Kudos Queue without sidekiq</a></p>
     <p><a href='/sidekiq'>Dashboard</a></p>
     "
   end
@@ -36,6 +38,13 @@ class App < Sinatra::Base
   get '/process_kudos_queue' do
     "
     <p>Processing kudos queue: #{KudosWorker.perform_async}</p>
+    <p><a href='/'>Back</a></p>
+    "
+  end
+
+  get '/process_kudos_queue_without_sidekiq' do
+    "
+    <p>Processing kudos queue: #{KudosService.new.kudos}</p>
     <p><a href='/'>Back</a></p>
     "
   end

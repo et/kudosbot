@@ -8,10 +8,17 @@ services:
     volumes:
       - .:/app
     depends_on:
+      - selenium
       - redis
     environment:
+      - SELENIUM_HOST=selenium
+      - SELENIUM_PORT=4444
       - REDIS_HOST=redis
       - REDIS_PORT=6379
+
+  selenium:
+    image: selenium/standalone-chrome-debug:3.0.1-germanium
+    ports: ['4444:4444', '5900:5900']
 
   redis:
     image: redis
