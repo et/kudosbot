@@ -1,7 +1,8 @@
-require 'dotenv/load'
 require 'capybara'
 require 'capybara/dsl'
+require 'dotenv/load'
 require 'selenium-webdriver'
+
 
 if ENV['SELENIUM_HOST']
   Capybara.register_driver :selenium_chrome_headless do |app|
@@ -21,7 +22,7 @@ else
   end
 end
 
-class KudosService
+class BaseKudosService
   include Capybara::DSL
 
   def initialize
@@ -37,17 +38,10 @@ class KudosService
     @password = password
   end
 
-  def kudos
+  def login
     visit 'http://strava.com/login'
     find('#email').set(@email)
     find('#password').set(@password)
     click_button('Log In')
-
-    find('#dashboard-feed') # waits until this dom element is available
-
-    page.evaluate_script("jQuery('button.js-add-kudo').click()")
-  rescue Capybara::ElementNotFound => e
-    p page.html
-    raise e
   end
 end

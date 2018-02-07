@@ -15,6 +15,11 @@ STRAVA_EMAIL=YOUR_STRAVA_EMAIL
 STRAVA_PASSWORD=YOUR_STRAVA_PASSWORD
 ```
 
+## Kudos
+
+* https://medium.com/@jfroom/docker-compose-capybara-selenium-standalone-for-dev-ci-6514bf16d77b
+* 
+
 ## Installation
 
 ```

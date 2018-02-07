@@ -7,8 +7,8 @@ require 'sidekiq'
 require 'sidekiq/api'
 require 'sidekiq/web'
 
-require_relative 'lib/services/kudos_service.rb'
-require_relative 'lib/workers/kudos_worker.rb'
+require_relative 'lib/services/dashboard_kudos_service.rb'
+require_relative 'lib/workers/dashboard_kudos_worker.rb'
 
 Sidekiq.configure_client do |config|
   config.redis = { url: "redis://#{ENV['REDIS_HOST']}:#{ENV['REDIS_PORT']}" }
@@ -29,22 +29,22 @@ class App < Sinatra::Base
     <p>In Progress: #{workers.size}</p>
     <p>Enqueued: #{stats.enqueued}</p>
     <p><a href='/'>Refresh</a></p>
-    <p><a href='/process_kudos_queue'>Process Kudos Queue</a></p>
-    <p><a href='/process_kudos_queue_without_sidekiq'>Process Kudos Queue without sidekiq</a></p>
+    <p><a href='/process_kudos_dashboard'>Kudos Dashboard</a></p>
+    <p><a href='/process_kudos_dashboard_without_sidekiq'>Kudos Dashboard without sidekiq</a></p>
     <p><a href='/sidekiq'>Dashboard</a></p>
     "
   end
 
-  get '/process_kudos_queue' do
+  get '/process_kudos_dashboard' do
     "
-    <p>Processing kudos queue: #{KudosWorker.perform_async}</p>
+    <p>Processing kudos queue: #{DashboardKudosWorker.perform_async}</p>
     <p><a href='/'>Back</a></p>
     "
   end
 
-  get '/process_kudos_queue_without_sidekiq' do
+  get '/process_kudos_dashboard_without_sidekiq' do
     "
-    <p>Processing kudos queue: #{KudosService.new.kudos}</p>
+    <p>Processing kudos queue: #{DashboardKudosService.new.kudos}</p>
     <p><a href='/'>Back</a></p>
     "
   end
