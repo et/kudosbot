@@ -21,7 +21,6 @@ else
   end
 end
 
-
 class KudosService
   include Capybara::DSL
 
@@ -47,5 +46,8 @@ class KudosService
     find('#dashboard-feed') # waits until this dom element is available
 
     page.evaluate_script("jQuery('button.js-add-kudo').click()")
+  rescue Capybara::ElementNotFound => e
+    p page.html
+    raise e
   end
 end
