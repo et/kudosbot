@@ -75,7 +75,10 @@ module KudosBot
         request.body.rewind
         request_payload = JSON.parse(request.body.read)
         p request_payload
-        ActivityKudosWorker.perform_async(request_payload['object_id'])
+
+        if request_payload['aspect_type'] == 'create'
+          ActivityKudosWorker.perform_async(request_payload['object_id'])
+        end
 
         # append the payload to a file
         File.open('events.txt', 'a') do |f|
