@@ -3,9 +3,9 @@ require_relative './base_kudos_service'
 class ActivityKudosService < BaseKudosService
   def kudos(activity_id)
     login
-    find('#dashboard-feed') # waits until this dom element is available
+    find('#dashboard-feed')
     visit "http://strava.com/activities/#{activity_id}"
-    find('.show-kudos') # waits until this dom element is available
-    page.evaluate_script("jQuery('button.show-kudos').click()")
+    find('.give-kudos')
+    page.evaluate_script("jQuery('.give-kudos span.button:first').click()")
   end
 end

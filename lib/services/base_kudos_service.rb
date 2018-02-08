@@ -46,5 +46,11 @@ class BaseKudosService
     find('#email').set(@email)
     find('#password').set(@password)
     click_button('Log In')
+
+  rescue Capybara::ElementNotFound => e
+    File.open('errors.txt', 'a') do |f|
+      f.puts(page.body)
+    end
+    raise e
   end
 end
