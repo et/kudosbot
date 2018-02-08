@@ -46,15 +46,6 @@ module KudosBot
       "
     end
 
-    get '/start-kudos-dashboard-worker-cron-job' do
-      job = Sidekiq::Cron::Job.new(name: 'Dashboard Kudos Worker - every 10min', cron: '*/10 * * * *', class: 'DashboardKudosWorker')
-      if job.save
-        job.to_json
-      else
-        job.errors.to_json
-      end
-    end
-
     namespace '/strava' do
       get '/list-subscriptions' do
         subscriptions = StravaAPIClient.new.list_subscriptions
