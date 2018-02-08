@@ -8,6 +8,8 @@ require 'json'
 require 'sidekiq'
 require 'sidekiq/api'
 require 'sidekiq/web'
+require 'sidekiq-cron'
+require 'sidekiq/cron/web'
 
 require_relative 'lib/services/activity_kudos_service.rb'
 require_relative 'lib/services/dashboard_kudos_service.rb'
