@@ -13,15 +13,10 @@ require 'sidekiq/cron/web'
 
 require_relative 'lib/services/activity_kudos_service.rb'
 require_relative 'lib/services/dashboard_kudos_service.rb'
-require_relative 'lib/workers'
+require_relative 'lib/workers.rb'
 require_relative 'lib/strava_api_client.rb'
 
-
-Sidekiq.configure_client do |config|
-  config.redis = { url: "redis://#{ENV['REDIS_HOST']}:#{ENV['REDIS_PORT']}" }
-end
-
-$redis = Redis.new(url: "redis://#{ENV['REDIS_HOST']}:#{ENV['REDIS_PORT']}")
+require_relative 'config/initializers/sidekiq.rb'
 
 module KudosBot
   class App < Sinatra::Base
@@ -37,7 +32,7 @@ module KudosBot
       erb :index, locals: { stats: stats, workers: workers }
     end
 
-    get '/process_kudos_dashboard' do
+    get '/process-kudos-dashboard' do
       "
       <p>Processing kudos queue: #{DashboardKudosWorker.perform_async}</p>
       <p><a href='/'>Back</a></p>
