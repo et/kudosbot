@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Kudosbot Admin</title>
+  </head>
+  <body>
+    <h1>Strava</h1>
+    <p><a href='/strava/list-subscriptions'>List subscriptions</a></p>
+
+    <p>Create subscription</p>
+    <form method="post" action="/strava/create-subscription">
+      <input type="text" name="callback_url" />
+      <input type="submit" value="Submit" />
+    </form>
+
+
+    <h1><a href='/sidekiq'>Sidekiq</a></h1>
+    <p>Processed: <%= stats.processed %></p>
+    <p>In Progress: <%= workers.size %></p>
+    <p>Enqueued: <%= stats.enqueued %></p>
+  </body>
+</html>

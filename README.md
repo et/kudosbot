@@ -13,12 +13,14 @@ Kudos bot is a way of automatically giving kudos to your friends.
 ```
 STRAVA_EMAIL=YOUR_STRAVA_EMAIL
 STRAVA_PASSWORD=YOUR_STRAVA_PASSWORD
+STRAVA_CLIENT_ID=YOUR_STRAVA_CLIENT_ID
+STRAVA_CLIENT_SECRET=YOUR_STRAVA_CLIENT_SECRET
 ```
 
 ## Kudos
 
 * https://medium.com/@jfroom/docker-compose-capybara-selenium-standalone-for-dev-ci-6514bf16d77b
-* 
+*
 
 ## Installation
 
