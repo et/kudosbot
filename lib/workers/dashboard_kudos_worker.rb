@@ -13,7 +13,7 @@ class DashboardKudosWorker
 
   def perform
     p 'Starting dashboard kudos worker'
-    DashboardkKudosService.new.kudos
+    DashboardKudosService.new.kudos
     p 'Ending dashboard kudos worker'
   end
 end
