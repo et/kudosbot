@@ -7,6 +7,7 @@ require 'sidekiq'
 require 'sidekiq/api'
 require 'sidekiq/web'
 
+require_relative 'lib/services/activity_kudos_service.rb'
 require_relative 'lib/services/dashboard_kudos_service.rb'
 require_relative 'lib/workers/dashboard_kudos_worker.rb'
 
@@ -62,6 +63,7 @@ class App < Sinatra::Base
     request.body.rewind
     request_payload = JSON.parse(request.body.read)
     p request_payload
+    ActivityKudosService.new.kudos(request_payload['object_id'])
 
     # append the payload to a file
     File.open('events.txt', 'a') do |f|

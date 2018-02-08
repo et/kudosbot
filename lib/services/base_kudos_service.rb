@@ -39,6 +39,9 @@ class BaseKudosService
   end
 
   def login
+    # sometimes we're still logged in
+    return nil if page.has_selector?('#dashboard')
+
     visit 'http://strava.com/login'
     find('#email').set(@email)
     find('#password').set(@password)
