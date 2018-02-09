@@ -51,6 +51,6 @@ class BaseKudosService
     File.open('errors.txt', 'a') do |f|
       f.puts(page.body)
     end
-    raise e
+    return nil
   end
 end
