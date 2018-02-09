@@ -3,7 +3,7 @@
 :logfile: ./log/sidekiq.log
 :concurrency: 10
 :queues:
-    - hard_worker
+    - default
 
 :schedule:
   DashboardKudosWorker:

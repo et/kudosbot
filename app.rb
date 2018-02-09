@@ -15,7 +15,11 @@ require_relative 'lib/services/dashboard_kudos_service.rb'
 require_relative 'lib/workers.rb'
 require_relative 'lib/strava_api_client.rb'
 
-require_relative 'config/initializers/sidekiq.rb'
+Sidekiq.configure_client do |config|
+  config.redis = { url: "redis://#{ENV['REDIS_HOST']}:#{ENV['REDIS_PORT']}" }
+end
+
+$redis = Redis.new(url: "redis://#{ENV['REDIS_HOST']}:#{ENV['REDIS_PORT']}")
 
 module KudosBot
   class App < Sinatra::Base
