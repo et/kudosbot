@@ -1,5 +1,0 @@
----
-dashboard_kudos_job:
-  cron: "*/5 * * * *"
-  class: "DashboardKudosWorker"
-  queue: hard_worker

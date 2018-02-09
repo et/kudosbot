@@ -3,4 +3,9 @@
 :logfile: ./log/sidekiq.log
 :concurrency: 10
 :queues:
-    - default
+    - hard_worker
+
+:schedule:
+  DashboardKudosWorker:
+    cron: '*/5 * * * *'   # Runs once every 5 min
+    class: DashboardKudosWorker

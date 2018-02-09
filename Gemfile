@@ -8,7 +8,7 @@ gem 'httparty'
 gem 'puma'
 gem 'selenium-webdriver'
 gem 'sidekiq'
-gem "sidekiq-cron", "~> 0.6.3"
+gem 'sidekiq-scheduler'
 gem 'sinatra'
 
 group :development do

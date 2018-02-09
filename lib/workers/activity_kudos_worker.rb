@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
-require 'dotenv/load'
-require 'capybara/dsl'
+require 'sidekiq-scheduler'
 require_relative '../services/activity_kudos_service.rb'
 
 class ActivityKudosWorker
