@@ -10,8 +10,7 @@ require 'sidekiq/api'
 require 'sidekiq/web'
 require 'sidekiq-scheduler/web'
 
-require_relative 'lib/services/activity_kudos_service.rb'
-require_relative 'lib/services/dashboard_kudos_service.rb'
+require_relative 'lib/services/kudos_service.rb'
 require_relative 'lib/workers.rb'
 require_relative 'lib/strava_api_client.rb'
 
@@ -42,9 +41,9 @@ module KudosBot
       "
     end
 
-    get '/process_kudos_dashboard_without_sidekiq' do
+    get '/process-kudos-dashboard-without-sidekiq' do
       "
-      <p>Processing kudos queue: #{DashboardKudosService.new.kudos}</p>
+      <p>Processing kudos queue: #{KudosService.new.kudos_dashboard}</p>
       <p><a href='/'>Back</a></p>
       "
     end
