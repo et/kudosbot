@@ -10,9 +10,6 @@ require 'sidekiq/api'
 require 'sidekiq/web'
 require 'sidekiq-scheduler/web'
 
-require_relative 'lib/services/kudos_service.rb'
-require_relative 'lib/workers.rb'
-require_relative 'lib/strava_api_client.rb'
 
 Sidekiq.configure_client do |config|
   config.redis = { url: "redis://#{ENV['REDIS_HOST']}:#{ENV['REDIS_PORT']}" }
@@ -21,6 +18,9 @@ end
 $redis = Redis.new(url: "redis://#{ENV['REDIS_HOST']}:#{ENV['REDIS_PORT']}")
 
 module KudosBot
+  require_relative './lib/services'
+  require_relative './lib/workers'
+
   class App < Sinatra::Base
     register Sinatra::Namespace
 
@@ -49,15 +49,16 @@ module KudosBot
     end
 
     namespace '/strava' do
+
       get '/list-subscriptions' do
-        subscriptions = StravaAPIClient.new.list_subscriptions
+        subscriptions = SubscriptionApiService.new.list_subscriptions
         content_type :json
         subscriptions.to_json
       end
 
       post '/create-subscription' do
         callback_url = params['callback_url']
-        response = StravaAPIClient.new.create_subscription(callback_url)
+        response = SubscriptionApiService.new.create_subscription(callback_url)
         response.to_json
       end
 

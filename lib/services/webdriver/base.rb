@@ -22,7 +22,7 @@ else
   end
 end
 
-class BaseKudosService
+class BaseWebdriverService
   include Capybara::DSL
 
   def initialize

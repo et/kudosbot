@@ -1,6 +1,6 @@
-require_relative './base_kudos_service'
+require_relative './base'
 
-class KudosService < BaseKudosService
+class KudosWebdriverService < BaseWebdriverService
   def kudos_dashboard
     login
     find('#dashboard-feed') # waits until this dom element is available

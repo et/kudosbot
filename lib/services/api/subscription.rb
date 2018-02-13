@@ -2,7 +2,7 @@ require 'dotenv/load'
 require 'httparty'
 require 'logger'
 
-class StravaAPIClient
+class SubscriptionApiService
   include HTTParty
 
   logger ::Logger.new(STDOUT)
